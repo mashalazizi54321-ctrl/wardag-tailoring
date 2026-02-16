@@ -1,0 +1,2737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wardak Tailoring System - د وردګ خیاطی سیستم</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Animate.css for additional animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #ff6b6b, #4ecdc4, #45b7d1, #96c93d);
+            min-height: 100vh;
+            padding: 20px;
+            animation: gradientBG 10s ease infinite;
+            background-size: 400% 400%;
+            position: relative;
+            overflow-x: hidden;
+            transition: background 0.5s ease;
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #1a1a2e);
+        }
+
+        body.dark-mode .container {
+            background: rgba(30, 30, 46, 0.97);
+            backdrop-filter: blur(20px);
+            color: #fff;
+        }
+
+        body.dark-mode .card {
+            background: #16213e;
+            color: #fff;
+            border-color: #0f3460;
+        }
+
+        body.dark-mode .card-title {
+            color: #fff;
+            background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.dark-mode .form-group label {
+            color: #ccc;
+        }
+
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group select,
+        body.dark-mode .form-group textarea {
+            background: #1a1a2e;
+            border-color: #0f3460;
+            color: #fff;
+        }
+
+        body.dark-mode .form-group input:focus,
+        body.dark-mode .form-group select:focus,
+        body.dark-mode .form-group textarea:focus {
+            border-color: #4ecdc4;
+            background: #16213e;
+        }
+
+        body.dark-mode table {
+            background: #16213e;
+            color: #fff;
+        }
+
+        body.dark-mode td {
+            color: #ccc;
+            border-bottom-color: #0f3460;
+        }
+
+        body.dark-mode tr:hover {
+            background: #1a1a2e;
+        }
+
+        body.dark-mode .search-input {
+            background: #1a1a2e;
+            border-color: #0f3460;
+            color: #fff;
+        }
+
+        body.dark-mode .search-input::placeholder {
+            color: #888;
+        }
+
+        body.dark-mode .backup-card {
+            background: linear-gradient(135deg, #16213e, #1a1a2e);
+        }
+
+        body.dark-mode .backup-card h3,
+        body.dark-mode .backup-card p {
+            color: #fff;
+        }
+
+        body.dark-mode .suggestions {
+            background: linear-gradient(135deg, #16213e, #1a1a2e);
+        }
+
+        body.dark-mode .footer {
+            background: linear-gradient(135deg, #16213e, #0f3460);
+        }
+
+        /* Dark Mode Toggle Button */
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .dark-mode-toggle:hover {
+            transform: scale(1.1) rotate(180deg);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+        }
+
+        body.dark-mode .dark-mode-toggle {
+            background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+            color: #1a1a2e;
+        }
+
+        /* Pashto/Dari Font */
+        .urdu-text, .pashto-text, .dari-text {
+            font-family: 'Noto Nastaliq Urdu', serif;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Particles Animation */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            animation: floatParticle 15s infinite;
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
+        }
+
+        body.dark-mode .particle {
+            background: rgba(78, 205, 196, 0.1);
+        }
+
+        @keyframes floatParticle {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 0.3;
+            }
+            50% { 
+                transform: translateY(-150px) rotate(180deg) scale(1.5);
+                opacity: 0.6;
+            }
+        }
+
+        /* Login Overlay */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(91, 123, 251, 0.9) 0%, rgba(105, 79, 215, 0.95) 90%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: loginOverlayPulse 3s infinite;
+        }
+
+        body.dark-mode .login-overlay {
+            background: radial-gradient(circle at 10% 20%, #1a1a2e 0%, #16213e 90%);
+        }
+
+        @keyframes loginOverlayPulse {
+            0%, 100% { backdrop-filter: blur(5px); }
+            50% { backdrop-filter: blur(10px); }
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 60px;
+            border-radius: 40px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4), 0 0 0 2px rgba(255,255,255,0.5) inset;
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            animation: loginSlideIn 1s cubic-bezier(0.68, -0.55, 0.265, 1.55), loginGlow 3s infinite;
+            transform-origin: center;
+        }
+
+        body.dark-mode .login-container {
+            background: #16213e;
+            color: white;
+        }
+
+        @keyframes loginSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-100px) scale(0.8) rotate(-10deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1) rotate(0);
+            }
+        }
+
+        @keyframes loginGlow {
+            0%, 100% { box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4), 0 0 0 2px rgba(255,255,255,0.5) inset; }
+            50% { box-shadow: 0 60px 100px rgba(91, 123, 251, 0.6), 0 0 0 4px rgba(255,255,255,0.8) inset; }
+        }
+
+        .login-icon {
+            font-size: 100px;
+      background: linear-gradient(135deg, 667eea, 764ba2);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            animation: iconBounce 2s infinite;
+        }
+
+        @keyframes iconBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .login-title {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleShine 3s linear infinite;
+            background-size: 200% auto;
+        }
+
+        body.dark-mode .login-title {
+            background: linear-gradient(135deg, #4ecdc4, #45b7d1, #96c93d);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @keyframes titleShine {
+            to { background-position: 200% center; }
+        }
+
+        .login-subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        body.dark-mode .login-subtitle {
+            color: #ccc;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 18px 25px;
+            border: 3px solid #e0e0e0;
+            border-radius: 50px;
+            font-size: 20px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+            text-align: center;
+            letter-spacing: 3px;
+            background: #f8f9fa;
+        }
+
+        body.dark-mode .login-input {
+            background: #1a1a2e;
+            border-color: #0f3460;
+            color: white;
+        }
+
+        .login-input:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 0 8px rgba(102, 126, 234, 0.2);
+            transform: scale(1.05);
+            background: white;
+        }
+
+        body.dark-mode .login-input:focus {
+            border-color: #4ecdc4;
+            background: #16213e;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            color: white;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            background-size: 200% auto;
+            animation: gradientMove 3s linear infinite;
+        }
+
+        body.dark-mode .login-btn {
+            background: linear-gradient(135deg, #4ecdc4, #45b7d1, #96c93d);
+        }
+
+        @keyframes gradientMove {
+            to { background-position: 200% center; }
+        }
+
+        .login-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transform: translate(-50%, -50%);
+            transition: width 0.8s, height 0.8s;
+        }
+
+        .login-btn:hover::before {
+            width: 500px;
+            height: 500px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.5);
+        }
+
+        /* Welcome Banner */
+        .welcome-banner {
+            background: linear-gradient(135deg, #ffd1d1 0%, #f3a7a7 50%, #ff9a9e 100%);
+            padding: 30px;
+            border-radius: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            animation: welcomeGlow 3s infinite, slideInDown 1s;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid rgba(255,255,255,0.5);
+        }
+
+        body.dark-mode .welcome-banner {
+            background: linear-gradient(135deg, #16213e, #1a1a2e, #0f3460);
+        }
+
+        @keyframes welcomeGlow {
+            0%, 100% { box-shadow: 0 10px 40px rgba(255, 154, 158, 0.3); }
+            50% { box-shadow: 0 20px 80px rgba(255, 154, 158, 0.6); }
+        }
+
+        .welcome-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+            animation: rotateSlow 15s linear infinite;
+        }
+
+        @keyframes rotateSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .welcome-text {
+            font-size: 48px;
+            font-weight: 800;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
+            animation: textPop 2s infinite;
+        }
+
+        @keyframes textPop {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .welcome-subtext {
+            font-size: 20px;
+            color: white;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            font-weight: 500;
+        }
+
+        /* Language Switcher and Dark Mode Toggle Container */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .language-switcher {
+            display: flex;
+            gap: 15px;
+        }
+
+        .dark-mode-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dark-mode-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .dark-mode-btn:hover::before {
+            width: 250px;
+            height: 250px;
+        }
+
+        .dark-mode-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+        }
+
+        body.dark-mode .dark-mode-btn {
+            background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+        }
+
+        .lang-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+            font-size: 16px;
+        }
+
+        .lang-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .lang-btn:hover::before {
+            width: 250px;
+            height: 250px;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.5);
+        }
+
+        body.dark-mode .lang-btn.active {
+            background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+        }
+
+        .lang-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(20px);
+            border-radius: 50px;
+            padding: 40px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(255,255,255,0.5) inset;
+            animation: containerAppear 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: none;
+        }
+
+        @keyframes containerAppear {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) translateY(50px) rotate(-2deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0) rotate(0);
+            }
+        }
+
+        /* Tab Content Styles */
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Header Styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 25px 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            border-radius: 30px;
+            color: white;
+            animation: headerFloat 4s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+            background-size: 200% auto;
+            animation: headerGradient 5s linear infinite, headerFloat 4s ease-in-out infinite;
+        }
+
+        body.dark-mode .header {
+            background: linear-gradient(135deg, #16213e, #0f3460, #1a1a2e);
+        }
+
+        @keyframes headerGradient {
+            to { background-position: 200% center; }
+        }
+
+        @keyframes headerFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            animation: rotateFast 20s linear infinite;
+        }
+
+        @keyframes rotateFast {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo i {
+            font-size: 70px;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+            animation: logoSpin 8s linear infinite;
+        }
+
+        @keyframes logoSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .system-name h1 {
+            font-size: 42px;
+            font-weight: 800;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+        }
+
+        .system-name p {
+            font-size: 16px;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        .contact-info {
+            text-align: right;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px 25px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            animation: contactGlow 3s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        @keyframes contactGlow {
+            0%, 100% { box-shadow: 0 0 30px rgba(255, 255, 255, 0.3); }
+            50% { box-shadow: 0 0 60px rgba(255, 255, 255, 0.7); }
+        }
+
+        .contact-info p {
+            margin: 8px 0;
+            font-size: 15px;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            width: 25px;
+            font-size: 18px;
+        }
+
+        /* Tab Navigation */
+        .tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 18px 35px;
+            border: none;
+            border-radius: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            flex: 1;
+            justify-content: center;
+            min-width: 180px;
+        }
+
+        body.dark-mode .tab-btn {
+            background: linear-gradient(135deg, #16213e, #0f3460);
+        }
+
+        .tab-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transform: translate(-50%, -50%);
+            transition: width 0.8s, height 0.8s;
+        }
+
+        .tab-btn:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .tab-btn i {
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .tab-btn:hover i {
+            transform: rotate(360deg) scale(1.2);
+        }
+
+        .tab-btn:hover {
+            transform: translateY(-8px) scale(1.08);
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.5);
+        }
+
+        body.dark-mode .tab-btn:hover {
+            box-shadow: 0 20px 50px rgba(78, 205, 196, 0.3);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #f093fb, #f5576c, #ff9a9e);
+            transform: scale(1.12) rotate(2deg);
+            animation: tabPulse 1.5s infinite;
+            background-size: 200% auto;
+        }
+
+        body.dark-mode .tab-btn.active {
+            background: linear-gradient(135deg, #4ecdc4, #45b7d1, #96c93d);
+        }
+
+        @keyframes tabPulse {
+            0%, 100% { box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); }
+            50% { box-shadow: 0 20px 60px rgba(245, 87, 108, 0.7); }
+        }
+
+        body.dark-mode .tab-btn.active {
+            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.3);
+        }
+
+        /* Search Box */
+        .search-box {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+            font-size: 20px;
+            z-index: 2;
+        }
+
+        body.dark-mode .search-box i {
+            color: #4ecdc4;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 18px 20px 18px 55px;
+            border: 3px solid #e0e0e0;
+            border-radius: 60px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .search-input:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 0 8px rgba(102, 126, 234, 0.15), 0 10px 30px rgba(0,0,0,0.1);
+            transform: scale(1.02);
+        }
+
+        body.dark-mode .search-input:focus {
+            border-color: #4ecdc4;
+            box-shadow: 0 0 0 8px rgba(78, 205, 196, 0.15);
+        }
+
+        .search-input::placeholder {
+            color: #999;
+            font-style: italic;
+        }
+
+        /* Cards and Forms */
+        .card {
+            background: white;
+            border-radius: 40px;
+            padding: 35px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            animation: cardAppear 0.8s ease-out;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.08) 0%, transparent 70%);
+            animation: cardRotate 20s linear infinite;
+        }
+
+        @keyframes cardRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 40px 80px rgba(102, 126, 234, 0.3);
+            border-color: #667eea;
+        }
+
+        body.dark-mode .card:hover {
+            box-shadow: 0 40px 80px rgba(78, 205, 196, 0.2);
+            border-color: #4ecdc4;
+        }
+
+        .card-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #333;
+            border-bottom: 4px solid transparent;
+            padding-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-image: linear-gradient(135deg, #667eea, #764ba2);
+            border-image-slice: 1;
+        }
+
+        body.dark-mode .card-title {
+            background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card-title i {
+            font-size: 36px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleIcon 3s ease-in-out infinite;
+        }
+
+        body.dark-mode .card-title i {
+            background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @keyframes titleIcon {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.3) rotate(10deg); }
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #444;
+            transition: all 0.3s ease;
+            font-size: 15px;
+        }
+
+        .form-group:hover label {
+            color: #667eea;
+            transform: translateX(8px);
+        }
+
+        body.dark-mode .form-group:hover label {
+            color: #4ecdc4;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 0 8px rgba(102, 126, 234, 0.15);
+            background: white;
+            transform: scale(1.02);
+        }
+
+        body.dark-mode .form-group input:focus,
+        body.dark-mode .form-group select:focus,
+        body.dark-mode .form-group textarea:focus {
+            border-color: #4ecdc4;
+            box-shadow: 0 0 0 8px rgba(78, 205, 196, 0.15);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 60px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+            flex: 1;
+            justify-content: center;
+            min-width: 160px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.8s, height 0.8s;
+        }
+
+        .btn:hover::before {
+            width: 500px;
+            height: 500px;
+        }
+
+        .btn i {
+            transition: transform 0.3s ease;
+            font-size: 20px;
+        }
+
+        .btn:hover i {
+            transform: scale(1.3) rotate(360deg);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.08);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0) scale(0.95);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            background-size: 200% auto;
+            animation: gradientMove 5s linear infinite;
+        }
+
+        body.dark-mode .btn-primary {
+            background: linear-gradient(135deg, #4ecdc4, #45b7d1);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #84fab0, #8fd3f4);
+            color: #333;
+            background-size: 200% auto;
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #fad0c4, #ff9a9e);
+            color: #333;
+            background-size: 200% auto;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #fbc2eb, #fe5196);
+            color: white;
+            background-size: 200% auto;
+        }
+
+        .btn-info {
+            background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+            color: #333;
+            background-size: 200% auto;
+        }
+
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+            border-radius: 30px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 1;
+            background: white;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        body.dark-mode .table-container {
+            background: #16213e;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 18px 15px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        body.dark-mode th {
+            background: linear-gradient(135deg, #16213e, #0f3460);
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        tr {
+            transition: all 0.3s ease;
+        }
+
+        tr:hover {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            transform: scale(1.01);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            font-size: 14px;
+        }
+
+        .action-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .action-btn:hover::before {
+            width: 200px;
+            height: 200px;
+        }
+
+        .action-btn.edit {
+            background: linear-gradient(135deg, #84fab0, #8fd3f4);
+        }
+
+        .action-btn.delete {
+            background: linear-gradient(135deg, #fbc2eb, #fe5196);
+        }
+
+        .action-btn:hover {
+            transform: scale(1.2) rotate(8deg);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 40px 25px;
+            border-radius: 40px;
+            color: white;
+            text-align: center;
+            animation: statPulse 3s infinite;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            background-size: 200% auto;
+        }
+
+        body.dark-mode .stat-card {
+            background: linear-gradient(135deg, #16213e, #0f3460);
+        }
+
+        @keyframes statPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3); }
+            50% { transform: scale(1.05); box-shadow: 0 25px 60px rgba(102, 126, 234, 0.6); }
+        }
+
+        body.dark-mode .stat-card {
+            box-shadow: 0 15px 40px rgba(78, 205, 196, 0.2);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            animation: statRotate 20s linear infinite;
+        }
+
+        @keyframes statRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px) scale(1.08);
+            box-shadow: 0 30px 70px rgba(102, 126, 234, 0.5);
+        }
+
+        body.dark-mode .stat-card:hover {
+            box-shadow: 0 30px 70px rgba(78, 205, 196, 0.3);
+        }
+
+        .stat-card i {
+            font-size: 60px;
+            margin-bottom: 20px;
+            animation: statIcon 3s ease-in-out infinite;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+        }
+
+        @keyframes statIcon {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-15px) scale(1.2); }
+        }
+
+        .stat-card .stat-value {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+        }
+
+        .stat-card .stat-label {
+            font-size: 18px;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        /* Backup & Restore Section */
+        .backup-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .backup-card {
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+            padding: 45px 30px;
+            border-radius: 50px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        body.dark-mode .backup-card {
+            background: linear-gradient(135deg, #16213e, #0f3460);
+        }
+
+        .backup-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, transparent 70%);
+            animation: backupRotate 20s linear infinite;
+        }
+
+        @keyframes backupRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .backup-card:hover {
+            transform: translateY(-20px) rotate(3deg) scale(1.08);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
+        }
+
+        .backup-card i {
+            font-size: 80px;
+            color: #667eea;
+            margin-bottom: 25px;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 15px 30px rgba(102, 126, 234, 0.3));
+        }
+
+        body.dark-mode .backup-card i {
+            color: #4ecdc4;
+        }
+
+        .backup-card:hover i {
+            transform: scale(1.3) rotate(360deg);
+            color: #764ba2;
+        }
+
+        body.dark-mode .backup-card:hover i {
+            color: #45b7d1;
+        }
+
+        .backup-card h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            color: #333;
+        }
+
+        body.dark-mode .backup-card h3 {
+            color: white;
+        }
+
+        .backup-card p {
+            color: #555;
+            position: relative;
+            z-index: 1;
+            font-size: 16px;
+        }
+
+        body.dark-mode .backup-card p {
+            color: #ccc;
+        }
+
+        /* Suggestions Section */
+        .suggestions {
+            background: linear-gradient(135deg, #f6d365, #fda085);
+            padding: 35px;
+            border-radius: 40px;
+            margin-top: 40px;
+            color: white;
+            animation: suggestionsGlow 3s infinite;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        body.dark-mode .suggestions {
+            background: linear-gradient(135deg, #16213e, #0f3460);
+        }
+
+        @keyframes suggestionsGlow {
+            0%, 100% { box-shadow: 0 15px 50px rgba(246, 211, 101, 0.3); }
+            50% { box-shadow: 0 30px 80px rgba(246, 211, 101, 0.6); }
+        }
+
+        .suggestions::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+            animation: suggestionsRotate 25s linear infinite;
+        }
+
+        @keyframes suggestionsRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .suggestions h3 {
+            font-size: 32px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .suggestions h3 i {
+            animation: lightbulb 2s ease-in-out infinite;
+            font-size: 40px;
+        }
+
+        @keyframes lightbulb {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.3) rotate(10deg); }
+        }
+
+        .suggestion-item {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            font-size: 17px;
+        }
+
+        .suggestion-item:hover {
+            transform: translateX(15px);
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding-left: 25px;
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        .suggestion-item i {
+            font-size: 28px;
+            animation: checkmark 2s ease-in-out infinite;
+        }
+
+        @keyframes checkmark {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            padding: 35px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            border-radius: 40px;
+            color: white;
+            animation: footerGlow 4s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+            background-size: 200% auto;
+            animation: footerGradient 6s linear infinite, footerGlow 4s ease-in-out infinite;
+        }
+
+        body.dark-mode .footer {
+            background: linear-gradient(135deg, #16213e, #0f3460, #1a1a2e);
+        }
+
+        @keyframes footerGradient {
+            to { background-position: 200% center; }
+        }
+
+        @keyframes footerGlow {
+            0%, 100% { box-shadow: 0 15px 50px rgba(102, 126, 234, 0.3); }
+            50% { box-shadow: 0 40px 100px rgba(102, 126, 234, 0.7); }
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            animation: footerRotate 25s linear infinite;
+        }
+
+        @keyframes footerRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .footer p {
+            position: relative;
+            z-index: 1;
+            margin: 15px 0;
+            font-size: 18px;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            transition: all 0.4s ease;
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+            font-size: 28px;
+        }
+
+        .footer a:hover {
+            color: #f093fb;
+            transform: scale(1.4) rotate(360deg);
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+        }
+
+        body.dark-mode .footer a:hover {
+            color: #4ecdc4;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 25px;
+            }
+            
+            .contact-info {
+                text-align: center;
+            }
+            
+            .tabs {
+                justify-content: center;
+            }
+            
+            .btn-group {
+                justify-content: center;
+            }
+            
+            .welcome-text {
+                font-size: 32px;
+            }
+            
+            .logo i {
+                font-size: 50px;
+            }
+            
+            .system-name h1 {
+                font-size: 32px;
+            }
+
+            .top-bar {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 16px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 20px;
+        }
+
+        body.dark-mode ::-webkit-scrollbar-track {
+            background: linear-gradient(135deg, #16213e, #0f3460);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #f093fb, #f5576c, #ff9a9e);
+            border-radius: 20px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #4ecdc4, #45b7d1, #96c93d);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #f5576c, #f093fb, #ff9a9e);
+            transform: scale(1.1);
+        }
+
+        /* Print styles for reports */
+        @media print {
+            .no-print {
+                display: none;
+            }
+            
+            .card {
+                box-shadow: none;
+                border: 2px solid #ddd;
+            }
+        }
+
+        /* Animation styles for notifications - FIXED: Moved from script to style */
+        @keyframes slideInRight {
+            0% {
+                transform: translateX(100%) rotate(10deg);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0) rotate(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOutRight {
+            0% {
+                transform: translateX(0) rotate(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100%) rotate(10deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles Background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Login Overlay -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-container animate__animated animate__bounceIn">
+            <i class="fas fa-cut login-icon"></i>
+            <h2 class="login-title">Wardag Tailoring</h2>
+            <p class="login-subtitle">Please enter access code (1-10) to continue</p>
+            <input type="password" class="login-input" id="accessCode" placeholder="Enter code (1-10)" maxlength="2" onkeypress="handleKeyPress(event)">
+            <button class="login-btn" onclick="verifyLogin()">
+                <i class="fas fa-lock-open"></i> Access System
+            </button>
+        </div>
+    </div>
+
+    <div class="container" id="mainContainer">
+        <!-- Welcome Banner -->
+        <div class="welcome-banner animate__animated animate__fadeInDown">
+            <div class="welcome-text" id="welcomeMessage">Welcome to Wardag Tailoring</div>
+            <div class="welcome-subtext" id="welcomeSubMessage">Your Premier Tailoring Management System</div>
+        </div>
+
+        <!-- Top Bar with Language Switcher and Dark Mode Toggle -->
+        <div class="top-bar">
+            <div class="language-switcher">
+                <button class="lang-btn active" onclick="switchLanguage('en')" id="langEn"><i class="fas fa-language"></i> English</button>
+                <button class="lang-btn" onclick="switchLanguage('ps')" id="langPs"><i class="fas fa-language"></i> پښتو</button>
+                <button class="lang-btn" onclick="switchLanguage('fa')" id="langFa"><i class="fas fa-language"></i> دری</button>
+            </div>
+            <button class="dark-mode-btn" onclick="toggleDarkMode()" id="darkModeToggle">
+                <i class="fas fa-moon"></i> <span id="darkModeText">Dark Mode</span>
+            </button>
+        </div>
+
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-cut"></i>
+                <div class="system-name">
+                    <h1 id="systemName">Wardag Tailoring</h1>
+                    <p id="systemSubName">Premium Tailoring Management</p>
+                </div>
+            </div>
+            <div class="contact-info">
+                <p><i class="fas fa-user"></i> Created by: Masihullah Azizi</p>
+                <p><i class="fas fa-phone"></i> 0778936856</p>
+                <p><i class="fas fa-envelope"></i> mashalazizi54321@gmail.com</p>
+                <p><i class="fab fa-whatsapp"></i> 0778936856</p>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tabs">
+            <button class="tab-btn" onclick="showTab(event, 'debtors')"><i class="fas fa-credit-card"></i> <span class="tab-text" data-en="Debtors" data-ps="پورداران" data-fa="قرض داران">Debtors</span></button>
+            <button class="tab-btn active" onclick="showTab(event, 'measurements')"><i class="fas fa-ruler"></i> <span class="tab-text" data-en="Measurements" data-ps="اندازه‌ګانې" data-fa="اندازه‌گیری">Measurements</span></button>
+            <button class="tab-btn" onclick="showTab(event, 'expenses')"><i class="fas fa-chart-line"></i> <span class="tab-text" data-en="Expenses" data-ps="لګښتونه" data-fa="مصارف">Expenses</span></button>
+            <button class="tab-btn" onclick="showTab(event, 'backup')"><i class="fas fa-database"></i> <span class="tab-text" data-en="Backup & Restore" data-ps="بیک اپ او بیا رغونه" data-fa="پشتیبان و بازیابی">Backup & Restore</span></button>
+        </div>
+
+        <!-- Debtors Tab -->
+        <div id="debtors" class="tab-content">
+            <div class="card">
+                <div class="card-title">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <span class="card-title-text" data-en="Debtor Registration" data-ps="د پوردار ثبتول" data-fa="ثبت قرض دار">Debtor Registration</span>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> <span data-en="Name" data-ps="نوم" data-fa="نام">Name</span></label>
+                        <input type="text" id="debtorName" placeholder="Enter debtor name">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-phone"></i> <span data-en="Phone Number" data-ps="د تلیفون شمېره" data-fa="شماره تلیفون">Phone Number</span></label>
+                        <input type="tel" id="debtorPhone" placeholder="Enter phone number">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-receipt"></i> <span data-en="Loan Amount/Receipt" data-ps="د پور مقدار/رسید" data-fa="مقدار قرض/رسید">Loan Amount/Receipt</span></label>
+                        <input type="text" id="loanReceipt" placeholder="Enter loan receipt">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-money-bill-wave"></i> <span data-en="Amount" data-ps="مقدار" data-fa="مقدار">Amount</span></label>
+                        <input type="number" id="loanAmount" placeholder="Enter amount">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-credit-card"></i> <span data-en="Payment Type" data-ps="د تادیې ډول" data-fa="نوعیه پرداخت">Payment Type</span></label>
+                        <select id="paymentType">
+                            <option value="cash" data-en="Cash" data-ps="نقد" data-fa="نقد">Cash</option>
+                            <option value="card" data-en="Card" data-ps="کارت" data-fa="کارت">Card</option>
+                            <option value="installment" data-en="Installment" data-ps="قسط" data-fa="قسط">Installment</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-align-left"></i> <span data-en="Description" data-ps="تفصیل" data-fa="توضیحات">Description</span></label>
+                        <textarea id="loanDescription" rows="2" placeholder="Enter description"></textarea>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="saveDebtor()"><i class="fas fa-save"></i> <span data-en="Save Debtor" data-ps="پوردار خوندي کړئ" data-fa="ذخیره قرض دار">Save Debtor</span></button>
+                    <button class="btn btn-info" onclick="clearDebtorForm()"><i class="fas fa-times"></i> <span data-en="Clear" data-ps="پاکول" data-fa="پاک کردن">Clear</span></button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <i class="fas fa-list"></i>
+                    <span class="card-title-text" data-en="Debtors List" data-ps="د پوردارانو لېست" data-fa="لیست قرض داران">Debtors List</span>
+                </div>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="search-input" id="debtorSearch" placeholder="Search debtors by name, phone, receipt or amount..." onkeyup="searchDebtors()">
+                </div>
+                <div class="table-container">
+                    <table id="debtorTable">
+                        <thead>
+                            <tr>
+                                <th><span data-en="Name" data-ps="نوم" data-fa="نام">Name</span></th>
+                                <th><span data-en="Phone" data-ps="تلیفون" data-fa="تلیفون">Phone</span></th>
+                                <th><span data-en="Receipt" data-ps="رسید" data-fa="رسید">Receipt</span></th>
+                                <th><span data-en="Amount" data-ps="مقدار" data-fa="مقدار">Amount</span></th>
+                                <th><span data-en="Payment Type" data-ps="د تادیې ډول" data-fa="نوعیه پرداخت">Payment Type</span></th>
+                                <th><span data-en="Description" data-ps="تفصیل" data-fa="توضیحات">Description</span></th>
+                                <th><span data-en="Actions" data-ps="کړنې" data-fa="عملیات">Actions</span></th>
+                            </tr>
+                        </thead>
+                        <tbody id="debtorTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Measurements Tab -->
+        <div id="measurements" class="tab-content active">
+            <div class="card">
+                <div class="card-title">
+                    <i class="fas fa-ruler-combined"></i>
+                    <span class="card-title-text" data-en="Customer Measurements" data-ps="د ګیراک اندازه‌ګانې" data-fa="اندازه‌گیری مشتری">Customer Measurements</span>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label><i class="fas fa-calendar"></i> <span data-en="Date" data-ps="نیټه" data-fa="تاریخ">Date</span></label>
+                        <input type="date" id="measureDate">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-clock"></i> <span data-en="Time Received" data-ps="د راوړلو وخت" data-fa="زمان دریافت">Time Received</span></label>
+                        <input type="time" id="timeReceived" value="09:00">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-clock"></i> <span data-en="Delivery Time" data-ps="د سپارلو وخت" data-fa="زمان تحویل">Delivery Time</span></label>
+                        <input type="time" id="timeDelivery" value="17:00">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> <span data-en="Customer Name" data-ps="د ګیراک نوم" data-fa="نام مشتری">Customer Name</span></label>
+                        <input type="text" id="measureCustomerName" placeholder="Enter customer name">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-phone"></i> <span data-en="Phone Number" data-ps="د تلیفون شمېره" data-fa="شماره تلیفون">Phone Number</span></label>
+                        <input type="tel" id="measurePhone" placeholder="Enter phone number">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-shopping-cart"></i> <span data-en="Order Details" data-ps="د امر تفصیل" data-fa="جزئیات سفارش">Order Details</span></label>
+                        <textarea id="orderDetails" rows="2" placeholder="Enter order details (e.g., Suit, Shalwar Kameez, etc.)"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-tshirt"></i> <span data-en="Clothing Details" data-ps="د جامو تفصیل" data-fa="جزئیات لباس">Clothing Details</span></label>
+                        <textarea id="clothingDetails" rows="2" placeholder="Enter clothing details (style, design, etc.)"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-ruler"></i> <span data-en="Cloth Meters" data-ps="د ټوکر متره" data-fa="متراژ پارچه">Cloth Meters</span></label>
+                        <input type="number" step="0.1" id="clothMeters" placeholder="Enter meters of fabric">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-arrow-up"></i> <span data-en="Height" data-ps="قد" data-fa="قد">Height</span></label>
+                        <input type="text" id="height" placeholder="Enter height">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-tshirt"></i> <span data-en="Neck" data-ps="غاړه" data-fa="یقه">Neck</span></label>
+                        <input type="text" id="neck" placeholder="Enter neck size">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-hand-paper"></i> <span data-en="Sleeve" data-ps="آستین" data-fa="آستین">Sleeve</span></label>
+                        <input type="text" id="sleeve" placeholder="Enter sleeve length">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-arrows-alt-h"></i> <span data-en="Shoulder" data-ps="اوږه" data-fa="شانه">Shoulder</span></label>
+                        <input type="text" id="shoulder" placeholder="Enter shoulder width">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-arrows-alt-v"></i> <span data-en="Length" data-ps="اوږدوالی" data-fa="طول">Length</span></label>
+                        <input type="text" id="length" placeholder="Enter length">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-arrows-alt"></i> <span data-en="Bottom Width" data-ps="لاندنی پلنوالی" data-fa="عرض پایین">Bottom Width</span></label>
+                        <input type="text" id="bottomWidth" placeholder="Enter bottom width">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-shoe-prints"></i> <span data-en="Trouser" data-ps="پتلون" data-fa="شلوار">Trouser</span></label>
+                        <input type="text" id="trouser" placeholder="Enter trouser size">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-tag"></i> <span data-en="Price" data-ps="قیمت" data-fa="قیمت">Price</span></label>
+                        <input type="number" id="price" placeholder="Enter price">
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="saveMeasurement()"><i class="fas fa-save"></i> <span data-en="Save Measurement" data-ps="اندازه خوندي کړئ" data-fa="ذخیره اندازه‌گیری">Save Measurement</span></button>
+                    <button class="btn btn-danger" onclick="closeMeasurementForm()"><i class="fas fa-times"></i> <span data-en="Close" data-ps="تړل" data-fa="بستن">Close</span></button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <i class="fas fa-list"></i>
+                    <span class="card-title-text" data-en="Measurements List" data-ps="د اندازه‌ګانو لېست" data-fa="لیست اندازه‌گیری‌ها">Measurements List</span>
+                </div>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="search-input" id="measurementSearch" placeholder="Search by customer name, phone, or order..." onkeyup="searchMeasurements()">
+                </div>
+                <div class="table-container">
+                    <table id="measurementTable">
+                        <thead>
+                            <tr>
+                                <th><span data-en="Date" data-ps="نیټه" data-fa="تاریخ">Date</span></th>
+                                <th><span data-en="Time" data-ps="وخت" data-fa="زمان">Time</span></th>
+                                <th><span data-en="Customer" data-ps="ګیراک" data-fa="مشتری">Customer</span></th>
+                                <th><span data-en="Phone" data-ps="تلیفون" data-fa="تلیفون">Phone</span></th>
+                                <th><span data-en="Order" data-ps="امر" data-fa="سفارش">Order</span></th>
+                                <th><span data-en="Cloth (m)" data-ps="ټوکر (م)" data-fa="پارچه (م)">Cloth (m)</span></th>
+                                <th><span data-en="Height" data-ps="قد" data-fa="قد">Height</span></th>
+                                <th><span data-en="Neck" data-ps="غاړه" data-fa="یقه">Neck</span></th>
+                                <th><span data-en="Sleeve" data-ps="آستین" data-fa="آستین">Sleeve</span></th>
+                                <th><span data-en="Shoulder" data-ps="اوږه" data-fa="شانه">Shoulder</span></th>
+                                <th><span data-en="Length" data-ps="اوږدوالی" data-fa="طول">Length</span></th>
+                                <th><span data-en="Bottom" data-ps="لاندنی" data-fa="پایین">Bottom</span></th>
+                                <th><span data-en="Trouser" data-ps="پتلون" data-fa="شلوار">Trouser</span></th>
+                                <th><span data-en="Price" data-ps="قیمت" data-fa="قیمت">Price</span></th>
+                                <th><span data-en="Delivery" data-ps="سپارل" data-fa="تحویل">Delivery</span></th>
+                                <th><span data-en="Actions" data-ps="کړنې" data-fa="عملیات">Actions</span></th>
+                            </tr>
+                        </thead>
+                        <tbody id="measurementTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expenses Tab -->
+        <div id="expenses" class="tab-content">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-calendar-day"></i>
+                    <div class="stat-value" id="dailyExpense">$0</div>
+                    <div class="stat-label" data-en="Daily Expenses" data-ps="ورځني لګښتونه" data-fa="مصارف روزانه">Daily Expenses</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-calendar-week"></i>
+                    <div class="stat-value" id="monthlyExpense">$0</div>
+                    <div class="stat-label" data-en="Monthly Expenses" data-ps="میاشتني لګښتونه" data-fa="مصارف ماهانه">Monthly Expenses</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-calendar-year"></i>
+                    <div class="stat-value" id="yearlyExpense">$0</div>
+                    <div class="stat-label" data-en="Yearly Expenses" data-ps="کلني لګښتونه" data-fa="مصارف سالانه">Yearly Expenses</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <i class="fas fa-plus-circle"></i>
+                    <span class="card-title-text" data-en="Expense Registration" data-ps="د لګښت ثبتول" data-fa="ثبت مصارف">Expense Registration</span>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label><i class="fas fa-box"></i> <span data-en="Item Name" data-ps="د توکي نوم" data-fa="نام جنس">Item Name</span></label>
+                        <input type="text" id="itemName" placeholder="Enter item name">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-tag"></i> <span data-en="Expense Type" data-ps="د لګښت ډول" data-fa="نوعیه مصرف">Expense Type</span></label>
+                        <select id="expenseType">
+                            <option value="fabric" data-en="Fabric - Cotton" data-ps="ټوکر - پنبه" data-fa="پارچه - پنبه">Fabric - Cotton</option>
+                            <option value="fabric_silk" data-en="Fabric - Silk" data-ps="ټوکر - ورېښم" data-fa="پارچه - ابریشم">Fabric - Silk</option>
+                            <option value="fabric_wool" data-en="Fabric - Wool" data-ps="ټوکر - وړۍ" data-fa="پارچه - پشم">Fabric - Wool</option>
+                            <option value="fabric_linen" data-en="Fabric - Linen" data-ps="ټوکر - کتان" data-fa="پارچه - کتان">Fabric - Linen</option>
+                            <option value="thread_cotton" data-en="Thread - Cotton" data-ps="تار - پنبه" data-fa="نخ - پنبه">Thread - Cotton</option>
+                            <option value="thread_silk" data-en="Thread - Silk" data-ps="تار - ورېښم" data-fa="نخ - ابریشم">Thread - Silk</option>
+                            <option value="thread_polyester" data-en="Thread - Polyester" data-ps="تار - پالئیستر" data-fa="نخ - پلی استر">Thread - Polyester</option>
+                            <option value="button_plastic" data-en="Buttons - Plastic" data-ps="تڼۍ - پلاستیک" data-fa="دکمه - پلاستیک">Buttons - Plastic</option>
+                            <option value="button_metal" data-en="Buttons - Metal" data-ps="تڼۍ - فلز" data-fa="دکمه - فلزی">Buttons - Metal</option>
+                            <option value="button_wood" data-en="Buttons - Wood" data-ps="تڼۍ - لرګی" data-fa="دکمه - چوبی">Buttons - Wood</option>
+                            <option value="button_pearl" data-en="Buttons - Pearl" data-ps="تڼۍ - مرغلره" data-fa="دکمه - مروارید">Buttons - Pearl</option>
+                            <option value="zipper_metal" data-en="Zipper - Metal" data-ps="زیپر - فلز" data-fa="زیپ - فلزی">Zipper - Metal</option>
+                            <option value="zipper_plastic" data-en="Zipper - Plastic" data-ps="زیپر - پلاستیک" data-fa="زیپ - پلاستیک">Zipper - Plastic</option>
+                            <option value="zipper_invisible" data-en="Zipper - Invisible" data-ps="زیپر - پټ" data-fa="زیپ - نامرئی">Zipper - Invisible</option>
+                            <option value="lining" data-en="Lining Fabric" data-ps="استر" data-fa="آستر">Lining Fabric</option>
+                            <option value="interfacing" data-en="Interfacing" data-ps="چسب" data-fa="چسب پارچه">Interfacing</option>
+                            <option value="elastic" data-en="Elastic" data-ps="کمر بند" data-fa="کش">Elastic</option>
+                            <option value="lace" data-en="Lace/Trim" data-ps="ګوته/توري" data-fa="گلدوزی/نوار">Lace/Trim</option>
+                            <option value="ribbon" data-en="Ribbon" data-ps="ربان" data-fa="روبان">Ribbon</option>
+                            <option value="hook_eye" data-en="Hooks & Eyes" data-ps="چنګک/کانۍ" data-fa="قلاب و حلقه">Hooks & Eyes</option>
+                            <option value="snap" data-en="Snap Buttons" data-ps="تڼۍ - چپکی" data-fa="دکمه فشاری">Snap Buttons</option>
+                            <option value="studs" data-en="Studs/Rivets" data-ps="میخونه" data-fa="میخ/پرچ">Studs/Rivets</option>
+                            <option value="sequins" data-en="Sequins" data-ps="سکېن" data-fa="پولک">Sequins</option>
+                            <option value="beads" data-en="Beads" data-ps="مرغلرې" data-fa="منجوق">Beads</option>
+                            <option value="thread_embroidery" data-en="Embroidery Thread" data-ps="تار - ګلدوزۍ" data-fa="نخ - گلدوزی">Embroidery Thread</option>
+                            <option value="needles" data-en="Needles" data-ps="سوزن" data-fa="سوزن">Needles</option>
+                            <option value="pins" data-en="Pins" data-ps="پنډوس" data-fa="پین">Pins</option>
+                            <option value="scissors" data-en="Scissors" data-ps="قینچۍ" data-fa="قیچی">Scissors</option>
+                            <option value="measuring_tape" data-en="Measuring Tape" data-ps="پیمانه" data-fa="نوار متر">Measuring Tape</option>
+                            <option value="chalk" data-en="Tailor's Chalk" data-ps="چاک" data-fa="گچ خیاطی">Tailor's Chalk</option>
+                            <option value="pattern_paper" data-en="Pattern Paper" data-ps="کاغذ پترن" data-fa="کاغذ الگو">Pattern Paper</option>
+                            <option value="machine_oil" data-en="Machine Oil" data-ps="تیل ماشین" data-fa="روغن چرخ">Machine Oil</option>
+                            <option value="machine_parts" data-en="Machine Parts" data-ps="پرزې ماشین" data-fa="قطعات چرخ">Machine Parts</option>
+                            <option value="electricity" data-en="Electricity" data-ps="برښنا" data-fa="برق">Electricity</option>
+                            <option value="rent" data-en="Shop Rent" data-ps="کرایه دوکان" data-fa="اجاره دکان">Shop Rent</option>
+                            <option value="other" data-en="Other" data-ps="نور" data-fa="سایر">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-sort-numeric-up-alt"></i> <span data-en="Quantity" data-ps="تعداد" data-fa="تعداد">Quantity</span></label>
+                        <input type="number" id="quantity" placeholder="Enter quantity">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-dollar-sign"></i> <span data-en="Unit Price" data-ps="فی نرخ" data-fa="قیمت واحد">Unit Price</span></label>
+                        <input type="number" id="unitPrice" placeholder="Enter unit price">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-calculator"></i> <span data-en="Total Price" data-ps="ټول قیمت" data-fa="مجموع قیمت">Total Price</span></label>
+                        <input type="number" id="totalPrice" placeholder="Total price" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-align-left"></i> <span data-en="Description" data-ps="تفصیل" data-fa="توضیحات">Description</span></label>
+                        <textarea id="expenseDescription" rows="2" placeholder="Enter description"></textarea>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="saveExpense()"><i class="fas fa-save"></i> <span data-en="Save Expense" data-ps="لګښت خوندي کړئ" data-fa="ذخیره مصرف">Save Expense</span></button>
+                    <button class="btn btn-info" onclick="clearExpenseForm()"><i class="fas fa-times"></i> <span data-en="Clear" data-ps="پاکول" data-fa="پاک کردن">Clear</span></button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <i class="fas fa-list"></i>
+                    <span class="card-title-text" data-en="Expenses List" data-ps="د لګښتونو لېست" data-fa="لیست مصارف">Expenses List</span>
+                </div>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="search-input" id="expenseSearch" placeholder="Search expenses by item or type..." onkeyup="searchExpenses()">
+                </div>
+                <div class="table-container">
+                    <table id="expenseTable">
+                        <thead>
+                            <tr>
+                                <th><span data-en="Date" data-ps="نیټه" data-fa="تاریخ">Date</span></th>
+                                <th><span data-en="Item" data-ps="توکی" data-fa="جنس">Item</span></th>
+                                <th><span data-en="Type" data-ps="ډول" data-fa="نوع">Type</span></th>
+                                <th><span data-en="Quantity" data-ps="تعداد" data-fa="تعداد">Quantity</span></th>
+                                <th><span data-en="Unit Price" data-ps="فی نرخ" data-fa="قیمت واحد">Unit Price</span></th>
+                                <th><span data-en="Total" data-ps="ټول" data-fa="مجموع">Total</span></th>
+                                <th><span data-en="Description" data-ps="تفصیل" data-fa="توضیحات">Description</span></th>
+                                <th><span data-en="Actions" data-ps="کړنې" data-fa="عملیات">Actions</span></th>
+                            </tr>
+                        </thead>
+                        <tbody id="expenseTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Backup & Restore Tab -->
+        <div id="backup" class="tab-content">
+            <div class="backup-section">
+                <div class="backup-card" onclick="backupData()">
+                    <i class="fas fa-download"></i>
+                    <h3 data-en="Backup Database" data-ps="بیک اپ ډیټابیس" data-fa="پشتیبان دیتابیس">Backup Database</h3>
+                    <p data-en="Download all data as JSON file" data-ps="ټول معلومات د JSON فایل په توګه ډاونلوډ کړئ" data-fa="دانلود تمام اطلاعات به صورت فایل JSON">Download all data as JSON file</p>
+                </div>
+                <div class="backup-card" onclick="document.getElementById('restoreFile').click()">
+                    <i class="fas fa-upload"></i>
+                    <h3 data-en="Restore Database" data-ps="بیا رغونه ډیټابیس" data-fa="بازیابی دیتابیس">Restore Database</h3>
+                    <p data-en="Upload and restore from backup" data-ps="د بیک اپ څخه معلومات پورته او بحال کړئ" data-fa="آپلود و بازیابی از پشتیبان">Upload and restore from backup</p>
+                    <input type="file" id="restoreFile" accept=".json" style="display: none;" onchange="restoreData(this)">
+                </div>
+                <div class="backup-card" onclick="clearAllData()">
+                    <i class="fas fa-trash-alt"></i>
+                    <h3 data-en="Clear All Data" data-ps="ټول معلومات پاک کړئ" data-fa="پاک کردن تمام اطلاعات">Clear All Data</h3>
+                    <p data-en="Reset the entire database" data-ps="ټول ډیټابیس بیا تنظیم کړئ" data-fa="بازنشانی کل دیتابیس">Reset the entire database</p>
+                </div>
+            </div>
+
+            <div class="suggestions">
+                <h3><i class="fas fa-lightbulb"></i> <span data-en="Suggestions & Tips" data-ps="وړاندیزونه او لارښوونې" data-fa="توصیه‌ها و نکات">Suggestions & Tips</span></h3>
+                <div class="suggestion-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span data-en="Regular backups prevent data loss - backup daily!" data-ps="منظم بیک اپ د معلوماتو له لاسه ورکولو مخه نیسي - هره ورځ بیک اپ وکړئ!" data-fa="پشتیبان منظم از از دست رفتن اطلاعات جلوگیری می‌کند - روزانه پشتیبان بگیرید!">Regular backups prevent data loss - backup daily!</span>
+                </div>
+                <div class="suggestion-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span data-en="Keep customer measurements updated for better service" data-ps="د ښې خدمت لپاره د ګیراکانو اندازه‌ګانې تازه وساتئ" data-fa="برای خدمات بهتر اندازه‌گیری مشتریان را به‌روز نگه دارید">Keep customer measurements updated for better service</span>
+                </div>
+                <div class="suggestion-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span data-en="Track expenses to optimize your business costs" data-ps="د خپل کار لګښتونه تعقیب کړئ ترڅو یې غوره کړئ" data-fa="مصارف خود را پیگیری کنید تا هزینه‌های کسب و کار خود را بهینه کنید">Track expenses to optimize your business costs</span>
+                </div>
+                <div class="suggestion-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span data-en="Follow up with debtors regularly for timely payments" data-ps="د وخت تادیاتو لپاره په منظم ډول له پوردارانو سره اړیکه ونیسئ" data-fa="برای پرداخت به موقع با قرض داران به طور منظم پیگیری کنید">Follow up with debtors regularly for timely payments</span>
+                </div>
+                <div class="suggestion-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span data-en="Record delivery times accurately to avoid delays" data-ps="د سپارلو وختونه په سمه توګه ثبت کړئ ترڅو ځنډ مخنیوی وشي" data-fa="زمان تحویل را دقیق ثبت کنید تا از تاخیر جلوگیری شود">Record delivery times accurately to avoid delays</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Created with <i class="fas fa-heart" style="color: #ff6b6b;"></i> by Masihullah Azizi</p>
+            <p>
+                <a href="tel:0778936856"><i class="fas fa-phone"></i></a>
+                <a href="mailto:mashalazizi54321@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="https://wa.me/93778936856"><i class="fab fa-whatsapp"></i></a>
+            </p>
+            <p style="font-size: 14px; margin-top: 15px;">&copy; 2026 Wardag Tailoring System - All Rights Reserved</p>
+        </div>
+    </div>
+
+    <script>
+        // Data Storage
+        let debtors = JSON.parse(localStorage.getItem('debtors')) || [];
+        let measurements = JSON.parse(localStorage.getItem('measurements')) || [];
+        let expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+        
+        // Current language
+        let currentLang = 'en';
+
+        // Login verification
+        function verifyLogin() {
+            const code = document.getElementById('accessCode').value;
+            // Require a number from 1 to 10, must be numeric and within range
+            if(code && !isNaN(code) && Number.isInteger(Number(code)) && code >= 1 && code <= 10) {
+                document.getElementById('loginOverlay').style.display = 'none';
+                document.getElementById('mainContainer').style.display = 'block';
+                createParticles();
+                showWelcomeMessage();
+                localStorage.setItem('isLoggedIn', 'true');
+            } else {
+                showNotification('Invalid code! Please enter a whole number between 1 and 10.', 'error');
+            }
+        }
+
+        // Handle Enter key press
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                verifyLogin();
+            }
+        }
+
+        // Dark Mode Toggle
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            const darkModeText = document.getElementById('darkModeText');
+            const darkModeIcon = document.querySelector('#darkModeToggle i');
+            
+            if (isDarkMode) {
+                darkModeText.textContent = currentLang === 'en' ? 'Light Mode' : 
+                                          currentLang === 'ps' ? 'روښانه حالت' : 'حالت روشن';
+                darkModeIcon.className = 'fas fa-sun';
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                darkModeText.textContent = currentLang === 'en' ? 'Dark Mode' : 
+                                          currentLang === 'ps' ? 'تیاره حالت' : 'حالت تاریک';
+                darkModeIcon.className = 'fas fa-moon';
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        }
+
+        // Check for saved dark mode preference
+        function loadDarkModePreference() {
+            const darkModePref = localStorage.getItem('darkMode');
+            if (darkModePref === 'enabled') {
+                document.body.classList.add('dark-mode');
+                document.getElementById('darkModeText').textContent = 'Light Mode';
+                document.querySelector('#darkModeToggle i').className = 'fas fa-sun';
+            }
+        }
+
+        // Welcome message
+        function showWelcomeMessage() {
+            const welcomeElement = document.getElementById('welcomeMessage');
+            const messages = {
+                en: ['Welcome to Wardag Tailoring', 'Your Premier Tailoring Partner', 'Excellence in Every Stitch'],
+                ps: ['وردګ خیاطی ته ښه راغلاست', 'ستاسو د خیاطی غوره ملګری', 'په هره ګنډه کې غوره والی'],
+                fa: ['به واردګ خیاطی خوش آمدید', 'همکار برتر خیاطی شما', 'برتری در هر دوخت']
+            };
+            
+            let index = 0;
+            setInterval(() => {
+                welcomeElement.style.animation = 'none';
+                welcomeElement.offsetHeight;
+                welcomeElement.style.animation = 'welcomeSlide 1s ease-out';
+                welcomeElement.textContent = messages[currentLang][index % messages[currentLang].length];
+                index++;
+            }, 3000);
+        }
+
+        // Create particles background
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for(let i = 0; i < 60; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = Math.random() * 15 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = Math.random() * 15 + 10 + 's';
+                particle.style.background = `rgba(${Math.random() * 100 + 155}, ${Math.random() * 100 + 155}, ${Math.random() * 100 + 155}, 0.2)`;
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Language switching
+        function switchLanguage(lang) {
+            currentLang = lang;
+            
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`lang${lang.charAt(0).toUpperCase() + lang.slice(1)}`).classList.add('active');
+            
+            // Update dark mode button text
+            const darkModeText = document.getElementById('darkModeText');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            if (isDarkMode) {
+                darkModeText.textContent = lang === 'en' ? 'Light Mode' : 
+                                          lang === 'ps' ? 'روښانه حالت' : 'حالت روشن';
+            } else {
+                darkModeText.textContent = lang === 'en' ? 'Dark Mode' : 
+                                          lang === 'ps' ? 'تیاره حالت' : 'حالت تاریک';
+            }
+            
+            // Update all translatable elements
+            document.querySelectorAll('[data-en]').forEach(element => {
+                if(element.tagName === 'OPTION') {
+                    element.textContent = element.getAttribute(`data-${lang}`);
+                } else if(element.classList.contains('tab-text') || 
+                         element.classList.contains('card-title-text') ||
+                         element.classList.contains('stat-label') ||
+                         element.tagName === 'TH' ||
+                         element.tagName === 'LABEL' ||
+                         element.tagName === 'H3' ||
+                         element.tagName === 'P' ||
+                         element.tagName === 'SPAN') {
+                    element.textContent = element.getAttribute(`data-${lang}`);
+                }
+            });
+            
+            // Update welcome message
+            if(lang === 'en') {
+                document.getElementById('welcomeMessage').textContent = 'Welcome to Wardag Tailoring';
+                document.getElementById('welcomeSubMessage').textContent = 'Your Premier Tailoring Management System';
+                document.getElementById('systemName').textContent = 'Wardag Tailoring';
+                document.getElementById('systemSubName').textContent = 'Premium Tailoring Management';
+            } else if(lang === 'ps') {
+                document.getElementById('welcomeMessage').textContent = 'وردګ خیاطی ته ښه راغلاست';
+                document.getElementById('welcomeSubMessage').textContent = 'ستاسو د خیاطی غوره مدیریت سیستم';
+                document.getElementById('systemName').textContent = 'وردګ خیاطی';
+                document.getElementById('systemSubName').textContent = 'د خیاطی لوړ مدیریت';
+            } else if(lang === 'fa') {
+                document.getElementById('welcomeMessage').textContent = 'به واردګ خیاطی خوش آمدید';
+                document.getElementById('welcomeSubMessage').textContent = 'سیستم مدیریت برتر خیاطی شما';
+                document.getElementById('systemName').textContent = 'واردګ خیاطی';
+                document.getElementById('systemSubName').textContent = 'مدیریت عالی خیاطی';
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load dark mode preference
+            loadDarkModePreference();
+            
+            // Check if already logged in
+            if(localStorage.getItem('isLoggedIn') === 'true') {
+                document.getElementById('loginOverlay').style.display = 'none';
+                document.getElementById('mainContainer').style.display = 'block';
+                createParticles();
+                showWelcomeMessage();
+            }
+            
+            updateAllTables();
+            updateExpenseStats();
+            
+            // Set default date and time
+            const today = new Date().toISOString().split('T')[0];
+            const currentTime = new Date().toTimeString().slice(0,5);
+            
+            if(document.getElementById('measureDate')) {
+                document.getElementById('measureDate').value = today;
+            }
+            if(document.getElementById('timeReceived')) {
+                document.getElementById('timeReceived').value = currentTime;
+            }
+            if(document.getElementById('timeDelivery')) {
+                document.getElementById('timeDelivery').value = '17:00';
+            }
+
+            // Add event listeners for price calculation
+            const quantityInput = document.getElementById('quantity');
+            const unitPriceInput = document.getElementById('unitPrice');
+            
+            if(quantityInput) {
+                quantityInput.addEventListener('input', calculateTotal);
+            }
+            if(unitPriceInput) {
+                unitPriceInput.addEventListener('input', calculateTotal);
+            }
+        });
+
+        // Tab Switching
+        function showTab(event, tabName) {
+            // Remove active class from all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Add active class to selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked button
+            if(event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
+        }
+
+        // Calculate total price
+        function calculateTotal() {
+            const quantity = parseFloat(document.getElementById('quantity').value) || 0;
+            const unitPrice = parseFloat(document.getElementById('unitPrice').value) || 0;
+            document.getElementById('totalPrice').value = quantity * unitPrice;
+        }
+
+        // Search Functions
+        function searchDebtors() {
+            const searchTerm = document.getElementById('debtorSearch').value.toLowerCase();
+            const filteredDebtors = debtors.filter(debtor => 
+                (debtor.name && debtor.name.toLowerCase().includes(searchTerm)) ||
+                (debtor.phone && debtor.phone.toLowerCase().includes(searchTerm)) ||
+                (debtor.receipt && debtor.receipt.toLowerCase().includes(searchTerm)) ||
+                (debtor.amount && debtor.amount.toString().includes(searchTerm)) ||
+                (debtor.paymentType && debtor.paymentType.toLowerCase().includes(searchTerm))
+            );
+            updateDebtorTable(filteredDebtors);
+        }
+
+        function searchMeasurements() {
+            const searchTerm = document.getElementById('measurementSearch').value.toLowerCase();
+            const filteredMeasurements = measurements.filter(measurement => 
+                (measurement.customerName && measurement.customerName.toLowerCase().includes(searchTerm)) ||
+                (measurement.phone && measurement.phone.toLowerCase().includes(searchTerm)) ||
+                (measurement.orderDetails && measurement.orderDetails.toLowerCase().includes(searchTerm)) ||
+                (measurement.clothingDetails && measurement.clothingDetails.toLowerCase().includes(searchTerm))
+            );
+            updateMeasurementTable(filteredMeasurements);
+        }
+
+        function searchExpenses() {
+            const searchTerm = document.getElementById('expenseSearch').value.toLowerCase();
+            const filteredExpenses = expenses.filter(expense => 
+                (expense.itemName && expense.itemName.toLowerCase().includes(searchTerm)) ||
+                (expense.expenseType && expense.expenseType.toLowerCase().includes(searchTerm)) ||
+                (expense.description && expense.description.toLowerCase().includes(searchTerm))
+            );
+            updateExpenseTable(filteredExpenses);
+        }
+
+        // Debtor Functions
+        function saveDebtor() {
+            const debtor = {
+                id: Date.now(),
+                name: document.getElementById('debtorName').value,
+                phone: document.getElementById('debtorPhone').value,
+                receipt: document.getElementById('loanReceipt').value,
+                amount: document.getElementById('loanAmount').value,
+                paymentType: document.getElementById('paymentType').value,
+                description: document.getElementById('loanDescription').value
+            };
+
+            if(!debtor.name) {
+                showNotification('Please enter debtor name!', 'error');
+                return;
+            }
+
+            if(!debtor.amount) {
+                showNotification('Please enter loan amount!', 'error');
+                return;
+            }
+
+            debtors.push(debtor);
+            localStorage.setItem('debtors', JSON.stringify(debtors));
+            updateDebtorTable();
+            clearDebtorForm();
+            showNotification('Debtor saved successfully!', 'success');
+        }
+
+        function updateDebtorTable(filteredDebtors = debtors) {
+            const tbody = document.getElementById('debtorTableBody');
+            tbody.innerHTML = '';
+            
+            filteredDebtors.forEach(debtor => {
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td>${debtor.name || '-'}</td>
+                    <td>${debtor.phone || '-'}</td>
+                    <td>${debtor.receipt || '-'}</td>
+                    <td>$${debtor.amount}</td>
+                    <td>${debtor.paymentType}</td>
+                    <td>${debtor.description || '-'}</td>
+                    <td class="action-btns">
+                        <button class="action-btn edit" onclick="editDebtor(${debtor.id})"><i class="fas fa-edit"></i></button>
+                        <button class="action-btn delete" onclick="deleteDebtor(${debtor.id})"><i class="fas fa-trash"></i></button>
+                    </td>
+                `;
+            });
+        }
+
+        function editDebtor(id) {
+            const debtor = debtors.find(d => d.id === id);
+            if(debtor) {
+                document.getElementById('debtorName').value = debtor.name || '';
+                document.getElementById('debtorPhone').value = debtor.phone || '';
+                document.getElementById('loanReceipt').value = debtor.receipt || '';
+                document.getElementById('loanAmount').value = debtor.amount || '';
+                document.getElementById('paymentType').value = debtor.paymentType || 'cash';
+                document.getElementById('loanDescription').value = debtor.description || '';
+                
+                // Store ID for update
+                document.getElementById('debtorName').dataset.editId = id;
+                showNotification('Edit debtor details and click Save', 'info');
+            }
+        }
+
+        function deleteDebtor(id) {
+            if(confirm('Are you sure you want to delete this debtor?')) {
+                debtors = debtors.filter(d => d.id !== id);
+                localStorage.setItem('debtors', JSON.stringify(debtors));
+                updateDebtorTable();
+                showNotification('Debtor deleted successfully!', 'warning');
+            }
+        }
+
+        function clearDebtorForm() {
+            document.getElementById('debtorName').value = '';
+            document.getElementById('debtorPhone').value = '';
+            document.getElementById('loanReceipt').value = '';
+            document.getElementById('loanAmount').value = '';
+            document.getElementById('paymentType').value = 'cash';
+            document.getElementById('loanDescription').value = '';
+            delete document.getElementById('debtorName').dataset.editId;
+        }
+
+        // Measurement Functions
+        function saveMeasurement() {
+            const measurement = {
+                id: Date.now(),
+                date: document.getElementById('measureDate').value,
+                timeReceived: document.getElementById('timeReceived').value,
+                timeDelivery: document.getElementById('timeDelivery').value,
+                customerName: document.getElementById('measureCustomerName').value,
+                phone: document.getElementById('measurePhone').value,
+                orderDetails: document.getElementById('orderDetails').value,
+                clothingDetails: document.getElementById('clothingDetails').value,
+                clothMeters: document.getElementById('clothMeters').value,
+                height: document.getElementById('height').value,
+                neck: document.getElementById('neck').value,
+                sleeve: document.getElementById('sleeve').value,
+                shoulder: document.getElementById('shoulder').value,
+                length: document.getElementById('length').value,
+                bottomWidth: document.getElementById('bottomWidth').value,
+                trouser: document.getElementById('trouser').value,
+                price: document.getElementById('price').value
+            };
+
+            if(!measurement.customerName) {
+                showNotification('Please enter customer name!', 'error');
+                return;
+            }
+
+            measurements.push(measurement);
+            localStorage.setItem('measurements', JSON.stringify(measurements));
+            updateMeasurementTable();
+            closeMeasurementForm();
+            showNotification('Measurement saved successfully!', 'success');
+        }
+
+        function updateMeasurementTable(filteredMeasurements = measurements) {
+            const tbody = document.getElementById('measurementTableBody');
+            tbody.innerHTML = '';
+            
+            filteredMeasurements.forEach(measurement => {
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td>${measurement.date || '-'}</td>
+                    <td>${measurement.timeReceived || '-'}</td>
+                    <td>${measurement.customerName}</td>
+                    <td>${measurement.phone || '-'}</td>
+                    <td>${measurement.orderDetails || '-'}</td>
+                    <td>${measurement.clothMeters || '-'} m</td>
+                    <td>${measurement.height || '-'}</td>
+                    <td>${measurement.neck || '-'}</td>
+                    <td>${measurement.sleeve || '-'}</td>
+                    <td>${measurement.shoulder || '-'}</td>
+                    <td>${measurement.length || '-'}</td>
+                    <td>${measurement.bottomWidth || '-'}</td>
+                    <td>${measurement.trouser || '-'}</td>
+                    <td>$${measurement.price || 0}</td>
+                    <td>${measurement.timeDelivery || '-'}</td>
+                    <td class="action-btns">
+                        <button class="action-btn edit" onclick="editMeasurement(${measurement.id})"><i class="fas fa-edit"></i></button>
+                        <button class="action-btn delete" onclick="deleteMeasurement(${measurement.id})"><i class="fas fa-trash"></i></button>
+                    </td>
+                `;
+            });
+        }
+
+        function editMeasurement(id) {
+            const measurement = measurements.find(m => m.id === id);
+            if(measurement) {
+                document.getElementById('measureDate').value = measurement.date || '';
+                document.getElementById('timeReceived').value = measurement.timeReceived || '';
+                document.getElementById('timeDelivery').value = measurement.timeDelivery || '';
+                document.getElementById('measureCustomerName').value = measurement.customerName || '';
+                document.getElementById('measurePhone').value = measurement.phone || '';
+                document.getElementById('orderDetails').value = measurement.orderDetails || '';
+                document.getElementById('clothingDetails').value = measurement.clothingDetails || '';
+                document.getElementById('clothMeters').value = measurement.clothMeters || '';
+                document.getElementById('height').value = measurement.height || '';
+                document.getElementById('neck').value = measurement.neck || '';
+                document.getElementById('sleeve').value = measurement.sleeve || '';
+                document.getElementById('shoulder').value = measurement.shoulder || '';
+                document.getElementById('length').value = measurement.length || '';
+                document.getElementById('bottomWidth').value = measurement.bottomWidth || '';
+                document.getElementById('trouser').value = measurement.trouser || '';
+                document.getElementById('price').value = measurement.price || '';
+                
+                // Store ID for update
+                document.getElementById('measureCustomerName').dataset.editId = id;
+                showNotification('Edit measurement details and click Save', 'info');
+            }
+        }
+
+        function deleteMeasurement(id) {
+            if(confirm('Are you sure you want to delete this measurement?')) {
+                measurements = measurements.filter(m => m.id !== id);
+                localStorage.setItem('measurements', JSON.stringify(measurements));
+                updateMeasurementTable();
+                showNotification('Measurement deleted successfully!', 'warning');
+            }
+        }
+
+        function closeMeasurementForm() {
+            document.getElementById('measureDate').value = new Date().toISOString().split('T')[0];
+            document.getElementById('timeReceived').value = new Date().toTimeString().slice(0,5);
+            document.getElementById('timeDelivery').value = '17:00';
+            document.getElementById('measureCustomerName').value = '';
+            document.getElementById('measurePhone').value = '';
+            document.getElementById('orderDetails').value = '';
+            document.getElementById('clothingDetails').value = '';
+            document.getElementById('clothMeters').value = '';
+            document.getElementById('height').value = '';
+            document.getElementById('neck').value = '';
+            document.getElementById('sleeve').value = '';
+            document.getElementById('shoulder').value = '';
+            document.getElementById('length').value = '';
+            document.getElementById('bottomWidth').value = '';
+            document.getElementById('trouser').value = '';
+            document.getElementById('price').value = '';
+            delete document.getElementById('measureCustomerName').dataset.editId;
+        }
+
+        // Expense Functions
+        function saveExpense() {
+            const expense = {
+                id: Date.now(),
+                date: new Date().toISOString().split('T')[0],
+                itemName: document.getElementById('itemName').value,
+                expenseType: document.getElementById('expenseType').options[document.getElementById('expenseType').selectedIndex].text,
+                expenseTypeValue: document.getElementById('expenseType').value,
+                quantity: document.getElementById('quantity').value,
+                unitPrice: document.getElementById('unitPrice').value,
+                totalPrice: document.getElementById('totalPrice').value,
+                description: document.getElementById('expenseDescription').value
+            };
+
+            if(!expense.itemName) {
+                showNotification('Please enter item name!', 'error');
+                return;
+            }
+
+            expenses.push(expense);
+            localStorage.setItem('expenses', JSON.stringify(expenses));
+            updateExpenseTable();
+            updateExpenseStats();
+            clearExpenseForm();
+            showNotification('Expense saved successfully!', 'success');
+        }
+
+        function updateExpenseTable(filteredExpenses = expenses) {
+            const tbody = document.getElementById('expenseTableBody');
+            tbody.innerHTML = '';
+            
+            filteredExpenses.forEach(expense => {
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td>${expense.date}</td>
+                    <td>${expense.itemName}</td>
+                    <td>${expense.expenseType}</td>
+                    <td>${expense.quantity}</td>
+                    <td>$${expense.unitPrice}</td>
+                    <td>$${expense.totalPrice}</td>
+                    <td>${expense.description || '-'}</td>
+                    <td class="action-btns">
+                        <button class="action-btn delete" onclick="deleteExpense(${expense.id})"><i class="fas fa-trash"></i></button>
+                    </td>
+                `;
+            });
+        }
+
+        function deleteExpense(id) {
+            if(confirm('Are you sure you want to delete this expense?')) {
+                expenses = expenses.filter(e => e.id !== id);
+                localStorage.setItem('expenses', JSON.stringify(expenses));
+                updateExpenseTable();
+                updateExpenseStats();
+                showNotification('Expense deleted successfully!', 'warning');
+            }
+        }
+
+        function updateExpenseStats() {
+            const today = new Date().toISOString().split('T')[0];
+            const currentMonth = new Date().getMonth();
+            const currentYear = new Date().getFullYear();
+            
+            let dailyTotal = 0;
+            let monthlyTotal = 0;
+            let yearlyTotal = 0;
+            
+            expenses.forEach(expense => {
+                const expenseDate = new Date(expense.date);
+                const total = parseFloat(expense.totalPrice) || 0;
+                
+                if(expense.date === today) {
+                    dailyTotal += total;
+                }
+                
+                if(expenseDate.getMonth() === currentMonth && expenseDate.getFullYear() === currentYear) {
+                    monthlyTotal += total;
+                }
+                
+                if(expenseDate.getFullYear() === currentYear) {
+                    yearlyTotal += total;
+                }
+            });
+            
+            document.getElementById('dailyExpense').textContent = `$${dailyTotal.toFixed(2)}`;
+            document.getElementById('monthlyExpense').textContent = `$${monthlyTotal.toFixed(2)}`;
+            document.getElementById('yearlyExpense').textContent = `$${yearlyTotal.toFixed(2)}`;
+        }
+
+        function clearExpenseForm() {
+            document.getElementById('itemName').value = '';
+            document.getElementById('expenseType').value = 'fabric';
+            document.getElementById('quantity').value = '';
+            document.getElementById('unitPrice').value = '';
+            document.getElementById('totalPrice').value = '';
+            document.getElementById('expenseDescription').value = '';
+        }
+
+        // Backup & Restore Functions
+        function backupData() {
+            const data = {
+                debtors,
+                measurements,
+                expenses,
+                backupDate: new Date().toISOString(),
+                version: '1.0',
+                system: 'Wardag Tailoring System'
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Wardag_Tailoring_Backup_${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            
+            showNotification('Backup created successfully!', 'success');
+        }
+
+        function restoreData(input) {
+            const file = input.files[0];
+            if(!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    
+                    if(data.debtors) {
+                        debtors = data.debtors;
+                        localStorage.setItem('debtors', JSON.stringify(debtors));
+                    }
+                    if(data.measurements) {
+                        measurements = data.measurements;
+                        localStorage.setItem('measurements', JSON.stringify(measurements));
+                    }
+                    if(data.expenses) {
+                        expenses = data.expenses;
+                        localStorage.setItem('expenses', JSON.stringify(expenses));
+                    }
+                    
+                    updateAllTables();
+                    updateExpenseStats();
+                    showNotification('Data restored successfully!', 'success');
+                } catch(error) {
+                    showNotification('Invalid backup file!', 'error');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function clearAllData() {
+            if(confirm('⚠️ Are you sure you want to clear ALL data? This action cannot be undone!')) {
+                localStorage.clear();
+                debtors = [];
+                measurements = [];
+                expenses = [];
+                
+                updateAllTables();
+                updateExpenseStats();
+                showNotification('All data cleared successfully!', 'warning');
+            }
+        }
+
+        function updateAllTables() {
+            updateDebtorTable();
+            updateMeasurementTable();
+            updateExpenseTable();
+        }
+
+        // Notification System
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-exclamation-triangle'}"></i>
+                <span>${message}</span>
+            `;
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 30px;
+                right: 30px;
+                padding: 20px 35px;
+                background: ${type === 'success' ? 'linear-gradient(135deg, #84fab0, #8fd3f4)' : 
+                              type === 'error' ? 'linear-gradient(135deg, #fbc2eb, #fe5196)' : 
+                              'linear-gradient(135deg, #fad0c4, #ff9a9e)'};
+                color: ${type === 'success' ? '#333' : 'white'};
+                border-radius: 60px;
+                box-shadow: 0 15px 50px rgba(0,0,0,0.3), 0 0 0 2px rgba(255,255,255,0.5) inset;
+                z-index: 10000;
+                animation: slideInRight 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                font-size: 18px;
+                font-weight: 600;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 500);
+            }, 4000);
+        }
+
+        // Animation styles are now in the CSS section
+    </script>
+</body>
+</html>
